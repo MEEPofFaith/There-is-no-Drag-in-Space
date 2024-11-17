@@ -46,14 +46,7 @@ public class PlayerMain : MonoBehaviour
         upgrades.display();
     }
 
-    void FixedUpdate(){
-        //I don't like Unity's drag
-        if(drag > 0){
-            float mul = 1f - drag * Time.deltaTime;
-            self.angularVelocity *= mul;
-            self.velocity *= mul;
-        }
-
+    private void Update() {
         //Controls
         animator.SetBool("firing", false);
         if(!UpgradesManager.Instance.isOpen()){
@@ -73,6 +66,16 @@ public class PlayerMain : MonoBehaviour
             if(maxSpeed > 0){
                 self.velocity = Vector2.ClampMagnitude(self.velocity, maxSpeed);
             }
+        }
+
+    }
+
+    void FixedUpdate(){
+        //I don't like Unity's drag
+        if(drag > 0){
+            float mul = 1f - drag * Time.deltaTime;
+            self.angularVelocity *= mul;
+            self.velocity *= mul;
         }
 
         //Screen looping
